@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Note Taking App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem;
+            margin-top: 2rem;
+        }
+        .note-card {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .note-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .note-date {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        .note-content {
+            font-size: 1rem;
+            color: #374151;
+            white-space: pre-wrap; 
+        }
+        .note-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end; 
+        }
+        .action-button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .action-button.edit {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .action-button.edit:hover {
+            background-color: #d97706;
+        }
+        .action-button.delete {
+            background-color: #ef4444;
+            color: white;
+        }
+        .action-button.delete:hover {
+            background-color: #dc2626;
+        }
+        .message-box {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            pointer-events: none;
+        }
+        .message-box.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .message-box.error {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #ef4444;
+        }
+        .message-box.success {
+            background-color: #d1fae5;
+            color: #059669;
+            border: 1px solid #10b981;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-start justify-center min-h-screen p-8">
+    <div class="container p-8 space-y-8">
+        <h1 class="text-4xl font-extrabold text-center text-indigo-700 mb-8">Note Taking App</h1>
+
+
+        <div class="space-y-4">
+            <div>
+                <label for="noteTitleInput" class="block text-sm font-medium text-gray-700 mb-1">Note Title</label>
+                <input
+                    type="text"
+                    id="noteTitleInput"
+                    placeholder="Enter note title..."
+                    class="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-800"
+                >
+            </div>
+            <div>
+                <label for="noteContentInput" class="block text-sm font-medium text-gray-700 mb-1">Note Content</label>
+                <textarea
+                    id="noteContentInput"
+                    rows="6"
+                    placeholder="Write your note here..."
+                    class="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-800 resize-y"
+                ></textarea>
+            </div>
+            <button
+                id="saveNoteButton"
+                class="w-full bg-indigo-600 text-white p-3 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 ease-in-out font-semibold text-lg"
+            >
+                Save Note
+            </button>
+        </div>
+
+        <div id="messageBox" class="message-box"></div>
+
+        
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Your Notes</h2>
+            <div id="notesList" class="space-y-4">
+                
+                <p class="text-center text-gray-500" id="noNotesMessage">No notes yet. Start writing!</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
+
